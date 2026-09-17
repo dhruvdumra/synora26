@@ -5,9 +5,11 @@ import {Script} from "forge-std/Script.sol";
 import {BadgeRenderer} from "../src/BadgeRenderer.sol";
 import {Badge, badgeScore, badgeTier} from "../src/BadgeTypes.sol";
 
-/// @notice Writes the on-chain SVG for one badge per tier to ./previews for visual review.
+/// @notice Writes the on-chain SVG for one pass per tier to ./previews for visual review.
 /// @dev forge script script/RenderPreview.s.sol
 contract RenderPreview is Script {
+    address internal constant HOLDER = 0x70997970C51812dc3A010C7d01b50e0d17dc79C8;
+
     function run() external {
         vm.createDir("previews", true);
         _write("bronze", 7, Badge(3, 0, 1, 1, false, 0));
@@ -17,7 +19,7 @@ contract RenderPreview is Script {
     }
 
     function _write(string memory label, uint256 tokenId, Badge memory b) internal {
-        string memory image = BadgeRenderer.svg("NCrypt Pass", tokenId, b, badgeScore(b), badgeTier(b));
+        string memory image = BadgeRenderer.svg("Loyl", tokenId, HOLDER, b, badgeScore(b), badgeTier(b));
         vm.writeFile(string.concat("previews/", label, ".svg"), image);
     }
 }
