@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 760" width="1240" height="760" font-family="Helvetica Neue,Arial,sans-serif">
+  <title>Loyl architecture</title>
+  <desc>Attendees and judges reach one CloudFront domain. The site comes from S3; /api goes to an EC2 instance running the indexer behind Nginx. The indexer reads contract events from Sepolia and caches them in SQLite. Wallets talk to the contract directly. GitHub Actions deploys both halves.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#0c0d0f"/>
+    </marker>
+    <marker id="arrow-lime" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7f9c12"/>
+    </marker>
+  </defs>
+
+  <rect width="1240" height="760" fill="#eef0f3"/>
+
+  <text x="48" y="64" font-size="34" font-weight="800" fill="#0c0d0f">Loyl</text>
+  <text x="152" y="64" font-size="18" fill="#555a63">an event pass that levels up on-chain</text>
+  <rect x="48" y="80" width="64" height="5" fill="#c6f432"/>
+
+  <!-- People -->
+  <g>
+    <rect x="48" y="150" width="200" height="120" rx="12" fill="#ffffff" stroke="#d9dde3"/>
+    <text x="68" y="182" font-size="15" font-weight="700" fill="#0c0d0f">ATTENDEES</text>
+    <text x="68" y="208" font-size="14" fill="#555a63">Phones at the door:</text>
+    <text x="68" y="228" font-size="14" fill="#555a63">mint, show a code,</text>
+    <text x="68" y="248" font-size="14" fill="#555a63">meet people, see perks</text>
+
+    <rect x="48" y="300" width="200" height="100" rx="12" fill="#ffffff" stroke="#d9dde3"/>
+    <text x="68" y="332" font-size="15" font-weight="700" fill="#0c0d0f">STAFF</text>
+    <text x="68" y="358" font-size="14" fill="#555a63">Door console: sessions,</text>
+    <text x="68" y="378" font-size="14" fill="#555a63">scan, batch check-in</text>
+
+    <rect x="48" y="430" width="200" height="88" rx="12" fill="#ffffff" stroke="#d9dde3"/>
+    <text x="68" y="462" font-size="15" font-weight="700" fill="#0c0d0f">JUDGES</text>
+    <text x="68" y="488" font-size="14" fill="#555a63">One HTTPS link,</text>
+    <text x="68" y="506" font-size="14" fill="#555a63">no setup needed</text>
+  </g>
+
+  <!-- CloudFront -->
+  <g>
+    <rect x="330" y="205" width="230" height="260" rx="12" fill="#ffffff" stroke="#0c0d0f" stroke-width="2"/>
+    <text x="352" y="240" font-size="15" font-weight="700" fill="#0c0d0f">CLOUDFRONT</text>
+    <text x="352" y="262" font-size="13" fill="#555a63">One domain, HTTPS,</text>
+    <text x="352" y="280" font-size="13" fill="#555a63">so no CORS and no</text>
+    <text x="352" y="298" font-size="13" fill="#555a63">mixed content</text>
+
+    <rect x="352" y="320" width="186" height="58" rx="8" fill="#eef0f3"/>
+    <text x="366" y="344" font-size="13" font-family="ui-monospace,Menlo,Consolas,monospace" fill="#0c0d0f">/</text>
+    <text x="386" y="344" font-size="13" fill="#555a63">static site</text>
+    <text x="366" y="366" font-size="12" fill="#555a63">SPA rewrite function</text>
+
+    <rect x="352" y="388" width="186" height="56" rx="8" fill="#c6f432"/>
+    <text x="366" y="412" font-size="13" font-family="ui-monospace,Menlo,Consolas,monospace" fill="#0c0d0f">/api/*</text>
+    <text x="418" y="412" font-size="13" fill="#0c0d0f">live data</text>
+    <text x="366" y="432" font-size="12" fill="#0c0d0f">no cache, streams</text>
+  </g>
+
+  <!-- S3 -->
+  <g>
+    <rect x="620" y="205" width="230" height="96" rx="12" fill="#ffffff" stroke="#d9dde3"/>
+    <text x="642" y="238" font-size="15" font-weight="700" fill="#0c0d0f">S3 BUCKET</text>
+    <text x="642" y="262" font-size="13" fill="#555a63">React build, private,</text>
+    <text x="642" y="280" font-size="13" fill="#555a63">reached only by the CDN</text>
+  </g>
+
+  <!-- EC2 -->
+  <g>
+    <rect x="620" y="330" width="230" height="200" rx="12" fill="#ffffff" stroke="#d9dde3"/>
+    <text x="642" y="362" font-size="15" font-weight="700" fill="#0c0d0f">EC2 t3.micro</text>
+    <text x="642" y="382" font-size="12" fill="#555a63">Docker, port 22 closed</text>
+
+    <rect x="642" y="396" width="186" height="42" rx="8" fill="#eef0f3"/>
+    <text x="656" y="422" font-size="13" fill="#0c0d0f">Nginx :80</text>
+
+    <rect x="642" y="446" width="186" height="66" rx="8" fill="#0e0f11"/>
+    <text x="656" y="470" font-size="13" font-weight="700" fill="#f2f3f5">Indexer :3001</text>
+    <text x="656" y="492" font-size="12" fill="#8b8f98">SQLite cache, SSE, gate</text>
+  </g>
+
+  <!-- Chain -->
+  <g>
+    <rect x="930" y="205" width="262" height="325" rx="12" fill="#0e0f11"/>
+    <text x="954" y="240" font-size="15" font-weight="700" fill="#f2f3f5">SEPOLIA</text>
+    <text x="954" y="262" font-size="13" fill="#8b8f98">the source of truth</text>
+
+    <rect x="954" y="284" width="214" height="104" rx="8" fill="#17181d" stroke="#2c2e35"/>
+    <text x="970" y="310" font-size="13" font-weight="700" fill="#f2f3f5">DynamicBadge</text>
+    <text x="970" y="332" font-size="12" fill="#8b8f98">soulbound ERC-721</text>
+    <text x="970" y="350" font-size="12" fill="#8b8f98">roles, sessions, batch</text>
+    <text x="970" y="368" font-size="12" fill="#8b8f98">EIP-712 connections</text>
+
+    <rect x="954" y="400" width="214" height="86" rx="8" fill="#17181d" stroke="#2c2e35"/>
+    <text x="970" y="426" font-size="13" font-weight="700" fill="#f2f3f5">BadgeRenderer</text>
+    <text x="970" y="448" font-size="12" fill="#8b8f98">draws the pass as SVG</text>
+    <text x="970" y="466" font-size="12" fill="#8b8f98">with embedded letterforms</text>
+
+    <rect x="954" y="498" width="214" height="16" rx="4" fill="#c6f432"/>
+    <text x="1066" y="510" font-size="11" font-weight="700" fill="#0c0d0f" text-anchor="middle">NO IPFS, NO IMAGE HOST</text>
+  </g>
+
+  <!-- Deploy pipeline -->
+  <g>
+    <rect x="330" y="600" width="520" height="110" rx="12" fill="#ffffff" stroke="#d9dde3"/>
+    <text x="352" y="632" font-size="15" font-weight="700" fill="#0c0d0f">GITHUB ACTIONS</text>
+    <text x="352" y="654" font-size="13" fill="#555a63">Push to main: tests and gas report, then deploy</text>
+    <text x="352" y="676" font-size="13" fill="#555a63">Site to S3 and the CDN. Image to ECR, rolled out over SSM.</text>
+    <text x="352" y="696" font-size="12" fill="#555a63">OIDC role, no stored AWS keys. Scoped to one bucket, one repo, one instance.</text>
+  </g>
+
+  <!-- Arrows -->
+  <g stroke="#0c0d0f" stroke-width="1.6" fill="none" marker-end="url(#arrow)">
+    <path d="M248 210 H300 V320 H330"/>
+    <path d="M248 350 H330"/>
+    <path d="M248 474 H300 V400 H330"/>
+    <path d="M560 300 H620 V253"/>
+    <path d="M560 416 H620 V416"/>
+    <path d="M850 478 H890 V300 H930"/>
+  </g>
+
+  <!-- Wallet writes straight to the chain -->
+  <g stroke="#7f9c12" stroke-width="1.8" fill="none" marker-end="url(#arrow-lime)" stroke-dasharray="7 5">
+    <path d="M150 150 V110 H1060 V205"/>
+  </g>
+  <text x="590" y="100" font-size="13" font-weight="700" fill="#5f7509">wallets sign and send transactions straight to the contract</text>
+
+  <g stroke="#555a63" stroke-width="1.4" fill="none" marker-end="url(#arrow)" stroke-dasharray="5 4">
+    <path d="M590 600 V530"/>
+    <path d="M735 600 V530"/>
+  </g>
+
+  <text x="48" y="712" font-size="13" fill="#555a63">Built by NCrypt for Synora26</text>
+  <text x="48" y="732" font-size="12" fill="#555a63">The indexer is a cache, rebuildable from events. If it is down, the site reads the contract directly.</text>
+</svg>

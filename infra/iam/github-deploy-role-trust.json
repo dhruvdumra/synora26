@@ -1,0 +1,19 @@
+{
+  "Version": "2012-10-17",
+  "Comment": "Trust policy for the role GitHub Actions assumes. Replace ACCOUNT_ID and the repo path. Only this repository, and only its main branch, can assume it.",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Federated": "arn:aws:iam::ACCOUNT_ID:oidc-provider/token.actions.githubusercontent.com"
+      },
+      "Action": "sts:AssumeRoleWithWebIdentity",
+      "Condition": {
+        "StringEquals": {
+          "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
+          "token.actions.githubusercontent.com:sub": "repo:dhruvdumra/synora26:ref:refs/heads/main"
+        }
+      }
+    }
+  ]
+}

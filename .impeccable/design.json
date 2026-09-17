@@ -1,0 +1,385 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-18T00:00:00Z",
+  "title": "Design System: Loyl",
+  "extensions": {
+    "colorMeta": {
+      "venue-grey": {
+        "role": "neutral",
+        "displayName": "Venue Grey",
+        "canonical": "#eef0f3",
+        "darkCounterpart": "#17181d",
+        "tonalRamp": ["#15171a", "#252a30", "#3a4149", "#525a64", "#767d87", "#a3aab3", "#cbd1d8", "#eef0f3"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Ink",
+        "canonical": "#0c0d0f",
+        "darkCounterpart": "#eef0f3",
+        "tonalRamp": ["#0c0d0f", "#1d1f23", "#32353b", "#4a4e56", "#6b707a", "#949aa4", "#c2c7ce", "#eaecef"]
+      },
+      "panel": {
+        "role": "neutral",
+        "displayName": "Panel White",
+        "canonical": "#ffffff",
+        "darkCounterpart": "#1e1f25",
+        "tonalRamp": ["#17181d", "#26272d", "#3b3d45", "#55575f", "#7b7e86", "#a8abb2", "#d6d8dc", "#ffffff"]
+      },
+      "raised-grey": {
+        "role": "neutral",
+        "displayName": "Raised Grey",
+        "canonical": "#e3e6eb",
+        "darkCounterpart": "#26272d",
+        "tonalRamp": ["#14161a", "#232730", "#373c46", "#4f555f", "#737a85", "#a0a7b1", "#c7cdd5", "#e3e6eb"]
+      },
+      "muted-ink": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#555a63",
+        "darkCounterpart": "#9da2ab",
+        "tonalRamp": ["#14161a", "#22252b", "#353942", "#555a63", "#767c87", "#9ba1ab", "#c4c9d0", "#e8eaee"]
+      },
+      "hairline": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "#d9dde3",
+        "darkCounterpart": "rgb(255 255 255 / 0.11)",
+        "tonalRamp": ["#14161a", "#232730", "#373c45", "#50565f", "#747b85", "#a2a8b2", "#d9dde3", "#f1f3f6"]
+      },
+      "field-stroke": {
+        "role": "neutral",
+        "displayName": "Field Stroke",
+        "canonical": "#cdd2da",
+        "darkCounterpart": "rgb(255 255 255 / 0.14)",
+        "tonalRamp": ["#13151a", "#22262f", "#363b44", "#4f545e", "#737984", "#a0a7b1", "#cdd2da", "#eef0f4"]
+      },
+      "signal": {
+        "role": "primary",
+        "displayName": "Access Lime",
+        "canonical": "#c6f432",
+        "tonalRamp": ["#1e2606", "#33400a", "#4b5e0f", "#688215", "#89a91c", "#a8cd24", "#c6f432", "#e2fa8c"]
+      },
+      "signal-ink": {
+        "role": "primary",
+        "displayName": "Signal Ink",
+        "canonical": "#0c0d0f",
+        "tonalRamp": ["#0c0d0f", "#1d1f23", "#32353b", "#4a4e56", "#6b707a", "#949aa4", "#c2c7ce", "#eaecef"]
+      },
+      "pass": {
+        "role": "secondary",
+        "displayName": "Pass Black",
+        "canonical": "#0e0f11",
+        "darkCounterpart": "#0b0c0e",
+        "sharedWith": "contracts/src/BadgeRenderer.sol CARD",
+        "tonalRamp": ["#0b0c0e", "#0e0f11", "#202226", "#34373d", "#4d5158", "#7c8088", "#b1b5bc", "#e6e8eb"]
+      },
+      "pass-ink": {
+        "role": "secondary",
+        "displayName": "Pass Ink",
+        "canonical": "#f2f3f5",
+        "sharedWith": "contracts/src/BadgeRenderer.sol INK",
+        "tonalRamp": ["#15161a", "#25272c", "#3a3d43", "#53565e", "#787c84", "#a5a9b1", "#d2d5da", "#f2f3f5"]
+      },
+      "pass-muted": {
+        "role": "secondary",
+        "displayName": "Pass Muted",
+        "canonical": "#8b8f98",
+        "sharedWith": "contracts/src/BadgeRenderer.sol MUTED",
+        "tonalRamp": ["#14161a", "#222630", "#363b44", "#4f545e", "#6f747d", "#8b8f98", "#b6bac1", "#e2e4e8"]
+      },
+      "band-bronze": {
+        "role": "tertiary",
+        "displayName": "Bronze Band",
+        "canonical": "#e08a4b",
+        "sharedWith": "contracts/src/BadgeRenderer.sol Tier.Bronze",
+        "tonalRamp": ["#2b1607", "#44230c", "#613312", "#83471a", "#a75c23", "#c6722f", "#e08a4b", "#f0bd91"]
+      },
+      "band-silver": {
+        "role": "tertiary",
+        "displayName": "Silver Band",
+        "canonical": "#c3cbd6",
+        "sharedWith": "contracts/src/BadgeRenderer.sol Tier.Silver",
+        "tonalRamp": ["#16191e", "#252a31", "#3a404a", "#535a66", "#767e8b", "#9ba3b0", "#c3cbd6", "#e6eaf0"]
+      },
+      "band-gold": {
+        "role": "tertiary",
+        "displayName": "Gold Band",
+        "canonical": "#f2c94c",
+        "sharedWith": "contracts/src/BadgeRenderer.sol Tier.Gold",
+        "tonalRamp": ["#2c2103", "#463508", "#644c0d", "#876714", "#ab841c", "#cda224", "#f2c94c", "#f8e195"]
+      },
+      "band-speaker": {
+        "role": "tertiary",
+        "displayName": "Speaker Violet",
+        "canonical": "#a48bff",
+        "sharedWith": "contracts/src/BadgeRenderer.sol Tier.Speaker",
+        "tonalRamp": ["#140a3d", "#1f1160", "#2d1a88", "#3d25b3", "#5238d9", "#7561f0", "#a48bff", "#cdbcff"]
+      },
+      "band-ink": {
+        "role": "tertiary",
+        "displayName": "Band Ink",
+        "canonical": "#0e0f11",
+        "tonalRamp": ["#0e0f11", "#1e2024", "#33363c", "#4b4f57", "#6c717b", "#959aa5", "#c3c8cf", "#ebedf0"]
+      },
+      "alert": {
+        "role": "neutral",
+        "displayName": "Alert",
+        "canonical": "#b42318",
+        "darkCounterpart": "#f97066",
+        "tonalRamp": ["#2b0806", "#47100b", "#661710", "#8a1d14", "#b42318", "#d9453a", "#f97066", "#ffb4ad"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Credential Display",
+        "purpose": "One statement per page, in condensed caps at 62% width. Home hero, claim page, live tier name."
+      },
+      "headline": {
+        "displayName": "Section Headline",
+        "purpose": "Page titles and full-bleed section openers, condensed caps."
+      },
+      "title": {
+        "displayName": "Panel Title",
+        "purpose": "Sub-sections inside a page: Route up, Doors, Ledger, Door code."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "The single sentence under a display heading, capped at 38-60ch."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose and list rows, capped around 44-48ch."
+      },
+      "label": {
+        "displayName": "Chip Label",
+        "purpose": "Access chips and tier chips only, condensed to 84% width."
+      },
+      "data": {
+        "displayName": "Machine Data",
+        "purpose": "Addresses, token ids, block numbers, scores, gas, thresholds, standard names, and the pass's machine strip. Never prose or headings."
+      }
+    },
+    "shadows": [
+      {
+        "name": "cast-pass",
+        "value": "drop-shadow(0 28px 36px rgb(12 13 15 / 0.22))",
+        "purpose": "The hanging credential only. The single shadow in the system; it exists because the pass is genuinely off the surface."
+      },
+      {
+        "name": "cast-pass-dark",
+        "value": "drop-shadow(0 20px 28px rgb(0 0 0 / 0.35))",
+        "purpose": "Same cast shadow tightened for the dark floor."
+      },
+      {
+        "name": "hairline-ring",
+        "value": "0 0 0 1px rgb(12 13 15 / 0.10)",
+        "purpose": "The default substitute for elevation on cards, tables, and QR blocks. Flat surfaces separated by a rule, not a lift."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-out-soft",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "The house easing. Reveal lifts, pass re-issue enter/exit, and any positional settle."
+      },
+      {
+        "name": "ease-scan",
+        "value": "cubic-bezier(0.45, 0, 0.2, 1)",
+        "purpose": "The lime re-issue scan line crossing the pass."
+      },
+      {
+        "name": "swing-spring",
+        "value": "spring(stiffness 42, damping 7, mass 1)",
+        "purpose": "The pass settling from 4.5 degrees about a 50% -40% origin. Damped, physical, once; never snapped or looped."
+      },
+      {
+        "name": "duration-control",
+        "value": "150ms",
+        "purpose": "Button and control colour transitions."
+      },
+      {
+        "name": "duration-reissue",
+        "value": "550ms (150ms delay), exit 250ms",
+        "purpose": "Old pass dropping out and new pass printing up on a tier change."
+      },
+      {
+        "name": "duration-scan",
+        "value": "1100ms (200ms delay)",
+        "purpose": "Scan line top-to-bottom traverse; the authored moment of the product."
+      },
+      {
+        "name": "duration-reveal",
+        "value": "700ms, 70ms stagger",
+        "purpose": "Content lifting 18px into place on viewport entry. Position only: opacity is never animated."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "animation-duration: 0.01ms; transition-duration: 0.01ms",
+        "purpose": "Global collapse under prefers-reduced-motion. The swing and scan line are also skipped entirely, and the re-issue becomes a 150ms cross-fade."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "container", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Signal Button",
+      "kind": "button",
+      "refersTo": "button-signal",
+      "description": "The one primary action per view: mint, get your pass, check in, confirm a connection.",
+      "html": "<button class=\"ds-btn-signal\">Get your pass<svg viewBox=\"0 0 256 256\" width=\"16\" height=\"16\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z\"/></svg></button>",
+      "css": ".ds-btn-signal { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 48px; padding: 0 24px; border: 1px solid transparent; border-radius: 8px; background: #c6f432; color: #0c0d0f; font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: 600; white-space: nowrap; cursor: pointer; transition: background-color 150ms, transform 150ms; } .ds-btn-signal:hover { background: #b6e12c; } .ds-btn-signal:focus-visible { outline: 2px solid #0c0d0f; outline-offset: 2px; } .ds-btn-signal:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "The standard secondary, set next to a signal button.",
+      "html": "<button class=\"ds-btn-outline\">Leaderboard</button>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 48px; padding: 0 24px; border: 1px solid rgb(12 13 15 / 0.15); border-radius: 8px; background: transparent; color: #0c0d0f; font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; font-size: 1rem; font-weight: 600; white-space: nowrap; cursor: pointer; transition: background-color 150ms, border-color 150ms, transform 150ms; } .ds-btn-outline:hover { border-color: rgb(12 13 15 / 0.30); background: rgb(12 13 15 / 0.04); } .ds-btn-outline:focus-visible { outline: 2px solid #0c0d0f; outline-offset: 2px; } .ds-btn-outline:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Tier Chip",
+      "kind": "chip",
+      "refersTo": "chip-tier",
+      "description": "A slice of the pass's tier band. The only place tier colour appears outside the pass itself, and always named in words.",
+      "html": "<span class=\"ds-chip-tier ds-chip-tier--gold\">Gold</span> <span class=\"ds-chip-tier ds-chip-tier--speaker\">Speaker</span>",
+      "css": ".ds-chip-tier { display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; color: #0e0f11; font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; font-variation-settings: 'wdth' 84; font-stretch: 84%; font-size: 12px; font-weight: 700; line-height: 1; letter-spacing: 0.06em; text-transform: uppercase; } .ds-chip-tier--bronze { background: #e08a4b; } .ds-chip-tier--silver { background: #c3cbd6; } .ds-chip-tier--gold { background: #f2c94c; } .ds-chip-tier--speaker { background: #a48bff; }"
+    },
+    {
+      "name": "Access State Chip",
+      "kind": "chip",
+      "refersTo": "chip-granted",
+      "description": "Granted or locked, on a door or a perk zone. Lime means granted; a quiet ink wash means locked. The state is always written out.",
+      "html": "<span class=\"ds-chip-access ds-chip-access--open\">Open</span> <span class=\"ds-chip-access ds-chip-access--locked\">Silver only</span>",
+      "css": ".ds-chip-access { display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 4px; font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; font-variation-settings: 'wdth' 84; font-stretch: 84%; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; } .ds-chip-access--open { background: #c6f432; color: #0c0d0f; } .ds-chip-access--locked { background: rgb(12 13 15 / 0.07); color: #555a63; }"
+    },
+    {
+      "name": "Panel Card",
+      "kind": "card",
+      "refersTo": "panel-card",
+      "description": "The 12px panel: cards, tables, QR blocks, state panels. Flat, on a hairline ring, never shadowed.",
+      "html": "<div class=\"ds-card\"><h3 class=\"ds-card__title\">Door code</h3><p class=\"ds-card__body\">Hold this up at the session door. Staff scan it and your pass updates within a block.</p><dl class=\"ds-card__row\"><dt>Networking points</dt><dd>4</dd></dl></div>",
+      "css": ".ds-card { display: flex; flex-direction: column; gap: 12px; padding: 24px; border-radius: 12px; background: #ffffff; color: #0c0d0f; box-shadow: 0 0 0 1px rgb(12 13 15 / 0.10); font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; } .ds-card__title { margin: 0; font-stretch: 62%; font-variation-settings: 'wdth' 62; font-weight: 800; font-size: 2.25rem; line-height: 0.92; letter-spacing: -0.005em; text-transform: uppercase; } .ds-card__body { margin: 0; max-width: 40ch; color: #555a63; line-height: 1.55; } .ds-card__row { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 0; padding: 12px 0; border-top: 1px solid rgb(12 13 15 / 0.15); } .ds-card__row dt { color: #555a63; } .ds-card__row dd { margin: 0; font-family: 'Martian Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace; font-variant-numeric: tabular-nums; }"
+    },
+    {
+      "name": "Text Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Staff-console input: transparent, hairline stroke, 8px corner, ring on focus.",
+      "html": "<input class=\"ds-input\" type=\"text\" placeholder=\"Pass ids, comma separated\" />",
+      "css": ".ds-input { width: 100%; min-width: 0; height: 32px; padding: 4px 10px; border: 1px solid #cdd2da; border-radius: 8px; background: transparent; color: #0c0d0f; font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; font-size: 0.875rem; outline: none; transition: border-color 150ms, box-shadow 150ms; } .ds-input::placeholder { color: #555a63; } .ds-input:focus-visible { border-color: #0c0d0f; box-shadow: 0 0 0 3px rgb(12 13 15 / 0.50); } .ds-input[aria-invalid='true'] { border-color: #b42318; box-shadow: 0 0 0 3px rgb(180 35 24 / 0.20); }"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": null,
+      "description": "Sticky 64px bar on a blurred translucent ground. The active route takes a 3px lime bar on the bar's bottom edge; that underline is the only nav decoration.",
+      "html": "<header class=\"ds-nav\"><a class=\"ds-nav__brand\" href=\"#\"><svg viewBox=\"0 0 16 22\" width=\"16\" height=\"22\" aria-hidden=\"true\"><rect x=\"0.75\" y=\"0.75\" width=\"14.5\" height=\"20.5\" rx=\"2.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"/><rect x=\"5.5\" y=\"3\" width=\"5\" height=\"1.6\" rx=\"0.8\" fill=\"currentColor\"/><rect x=\"0.75\" y=\"9\" width=\"14.5\" height=\"4.5\" fill=\"#c6f432\"/></svg><span>LOYL</span></a><nav class=\"ds-nav__links\"><a class=\"ds-nav__link ds-nav__link--active\" href=\"#\">My pass</a><a class=\"ds-nav__link\" href=\"#\">Leaderboard</a><a class=\"ds-nav__link\" href=\"#\">Perks</a></nav></header>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 32px; height: 64px; padding: 0 32px; border-bottom: 1px solid rgb(12 13 15 / 0.10); background: rgb(238 240 243 / 0.90); backdrop-filter: blur(12px); font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; } .ds-nav__brand { display: inline-flex; align-items: center; gap: 10px; color: #0c0d0f; text-decoration: none; } .ds-nav__brand span { font-stretch: 62%; font-variation-settings: 'wdth' 62; font-weight: 800; font-size: 26px; line-height: 1; letter-spacing: -0.01em; } .ds-nav__links { display: flex; align-items: center; } .ds-nav__link { position: relative; padding: 8px 12px; color: #555a63; font-size: 15px; font-weight: 500; text-decoration: none; transition: color 150ms; } .ds-nav__link:hover { color: #0c0d0f; } .ds-nav__link:focus-visible { outline: 2px solid #0c0d0f; outline-offset: 2px; } .ds-nav__link--active { color: #0c0d0f; } .ds-nav__link--active::after { content: ''; position: absolute; left: 12px; right: 12px; bottom: -21px; height: 3px; background: #c6f432; }"
+    },
+    {
+      "name": "Hanging Pass",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The signature object: a 540x860 black pass with a punched lanyard slot and a full-width tier band, hanging from a lime printed strap and casting the system's only shadow. The real artwork is an SVG the contract generates; this is the staging around it.",
+      "html": "<figure class=\"ds-pass\"><div class=\"ds-pass__strap\"><span class=\"ds-pass__strap-text\">LOYL &nbsp; SYNORA26 &nbsp; LOYL &nbsp; SYNORA26</span></div><div class=\"ds-pass__clip\"></div><div class=\"ds-pass__card\"><span class=\"ds-pass__slot\"></span><div class=\"ds-pass__band\"><span class=\"ds-pass__tier\">Gold</span></div><div class=\"ds-pass__data\"><span>LOYL / ACCESS</span><span>#0042</span></div></div></figure>",
+      "css": ".ds-pass { position: relative; width: 260px; margin: 0 auto; padding-top: 120px; font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; } .ds-pass__strap { position: absolute; top: 0; left: 50%; width: 28px; height: 108px; overflow: hidden; background: #c6f432; transform: translateX(-50%); } .ds-pass__strap-text { position: absolute; top: 0; left: 50%; transform: translateX(-50%); writing-mode: vertical-rl; font-stretch: 84%; font-variation-settings: 'wdth' 84; font-size: 10px; font-weight: 700; line-height: 1; letter-spacing: 0.12em; white-space: nowrap; color: rgb(12 13 15 / 0.80); } .ds-pass__clip { position: absolute; top: 104px; left: 50%; width: 16px; height: 20px; border: 2px solid #8b9099; border-radius: 3px; background: #b9bec6; transform: translateX(-50%); } .ds-pass__card { position: relative; aspect-ratio: 540 / 860; border-radius: 5.5%; background: #0e0f11; box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.14); filter: drop-shadow(0 28px 36px rgb(12 13 15 / 0.22)); overflow: hidden; } .ds-pass__slot { position: absolute; top: 4%; left: 50%; width: 16%; height: 1.8%; border-radius: 999px; background: #eef0f3; transform: translateX(-50%); } .ds-pass__band { position: absolute; top: 35%; left: 0; right: 0; height: 17%; display: flex; align-items: center; padding: 0 9%; background: #f2c94c; } .ds-pass__tier { font-stretch: 62%; font-variation-settings: 'wdth' 62; font-weight: 800; font-size: 2.5rem; line-height: 0.92; text-transform: uppercase; color: #0e0f11; } .ds-pass__data { position: absolute; bottom: 7%; left: 9%; right: 9%; display: flex; justify-content: space-between; font-family: 'Martian Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace; font-size: 10px; letter-spacing: 0.12em; color: #8b8f98; }"
+    },
+    {
+      "name": "Data List Row",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "The recurring operate-mode pattern: label left in prose, value right in tabular mono, separated by hairlines rather than boxes.",
+      "html": "<ul class=\"ds-rows\"><li><span>Check in to a session</span><span class=\"ds-rows__value\">+1 each, 3 to go</span></li><li><span>Give a talk</span><span class=\"ds-rows__value\">+3 each, 1 to go</span></li><li><span>Meet another attendee</span><span class=\"ds-rows__value\">+1 each, 3 to go</span></li></ul>",
+      "css": ".ds-rows { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border-top: 1px solid rgb(12 13 15 / 0.15); border-bottom: 1px solid rgb(12 13 15 / 0.15); font-family: 'Archivo Variable', 'Helvetica Neue', Arial, sans-serif; color: #0c0d0f; line-height: 1.55; } .ds-rows li { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding: 12px 0; } .ds-rows li + li { border-top: 1px solid rgb(12 13 15 / 0.10); } .ds-rows__value { flex-shrink: 0; white-space: nowrap; font-family: 'Martian Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace; font-size: 0.875rem; font-variant-numeric: tabular-nums; color: #555a63; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Access Credential",
+    "overview": "Loyl looks like the thing you wear around your neck at a conference, not like a trading card. The pass is a black PVC rectangle with a lanyard slot and a full-width access band in the tier colour, and everything else in the interface is the venue it hangs in: a cool daylight-grey floor, white panels, near-black ink, hairline rules instead of boxes. The credential is the only object with weight; the surfaces around it are flat, quiet, and operational.\n\nLight is the primary scene because the product is demonstrated in a lit hall and on a projector, and used one-handed at a door under house lights. Dark follows the system and is a tint of the same world, never a different identity. A single access-lime signal (#c6f432) is the only saturated colour outside the pass bands: it marks primary action, granted access, and live state. Tier colour is strictly material - it exists on the pass band and on the access chip cut from that band, nowhere else.\n\nType does the shouting so colour does not have to. Condensed Archivo at 62% width and weight 800, set in caps at up to 7rem, is the credential lettering; Martian Mono appears only where a machine reads along with you - addresses, token ids, scores, gas figures, the pass's own data strip. Motion is one authored moment, not an ambient effect: the pass swings to rest when it appears, and on a tier change the old card drops out while the new one prints up under a lime scan line.",
+    "keyCharacteristics": [
+      "Cool daylight-grey ground, white panels, near-black ink; light is primary, dark follows the system",
+      "One access-lime signal for primary action, granted, and live",
+      "Tier colour only on pass bands and access chips",
+      "Condensed caps display (Archivo, wdth 62, weight 800) against plain-width body text",
+      "Mono reserved for machine-readable data",
+      "Flat surfaces, hairline rules, one real cast shadow under the hanging pass",
+      "Panels 12px, controls 8px, access chips 4px",
+      "One authored motion moment, fully honouring prefers-reduced-motion"
+    ],
+    "rules": [
+      {
+        "name": "The One Signal Rule",
+        "body": "Lime means you may act or access is granted or live. It never decorates, never fills a large area (the widest use is a 4px-tall gas bar and a 28px lanyard), and never carries white text.",
+        "section": "colors"
+      },
+      {
+        "name": "The Band-Only Rule",
+        "body": "Tier colour appears on a pass band and on an access chip cut from that band. It never becomes a text colour, a button, a border, or a page background.",
+        "section": "colors"
+      },
+      {
+        "name": "The Never-By-Colour-Alone Rule",
+        "body": "Every tier and every access state is named in words next to its colour (\"Gold\", \"Access granted\", \"Needs Silver\"). Colour is confirmation, never the message.",
+        "section": "colors"
+      },
+      {
+        "name": "The Shared-Palette Rule",
+        "body": "Pass black, pass ink, pass muted, and the four band colours are a contract between web/src/index.css and contracts/src/BadgeRenderer.sol. Change one side and you must change the other in the same commit.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono-Is-Machine Rule",
+        "body": "Martian Mono is for what a machine produced or reads: addresses, ids, numerals, counts, gas, and the pass's data strip. It is never used for prose, headings, buttons, or nav.",
+        "section": "typography"
+      },
+      {
+        "name": "The One Shout Rule",
+        "body": "A page gets exactly one display-scale heading. Everything below it steps down to Title; two competing 7rem headings on one screen is a bug.",
+        "section": "typography"
+      },
+      {
+        "name": "The Caps-Are-Condensed Rule",
+        "body": "Uppercase is only ever set in condensed Archivo (62% for headings, 84% for chips). Uppercase at normal width is not part of this world.",
+        "section": "typography"
+      },
+      {
+        "name": "The Rules-Not-Boxes Rule",
+        "body": "Group content with a hairline and spacing first. Reach for a filled panel only when the content is a distinct object (a card table, a QR block, an empty state).",
+        "section": "layout"
+      },
+      {
+        "name": "The One Shadow Rule",
+        "body": "The cast shadow belongs to the hanging pass. Panels, buttons, chips, and dialogs are flat and take a hairline ring instead.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep light the primary scene and let dark follow the system as a tint of the same world.",
+      "Do spend access lime on one primary action per view, plus granted and live states.",
+      "Do name every tier and access state in words beside its colour.",
+      "Do assign radius by kind: panels 12px, controls 8px, access chips 4px.",
+      "Do set Martian Mono for addresses, ids, numerals, gas, and the machine strip, with .tabular on anything that changes in place.",
+      "Do set uppercase only in condensed Archivo (wdth 62 for headings, 84 for chips).",
+      "Do separate content with hairline rules and space before reaching for a filled panel.",
+      "Do keep the pass silhouette - slot, band, 5.5% corner - in every stand-in for a pass.",
+      "Do animate position, not opacity, for entrances, and gate the swing and scan line behind prefers-reduced-motion.",
+      "Do change web/src/index.css and BadgeRenderer.sol together when touching pass black, pass ink, pass muted, or a band colour."
+    ],
+    "donts": [
+      "Don't put white text on access lime; signal-ink is the only foreground it takes.",
+      "Don't let tier colour leave the pass band and the access chip - not as text, border, button, or background.",
+      "Don't give a panel, button, chip, or dialog a shadow; the cast shadow belongs to the hanging pass.",
+      "Don't set prose, headings, buttons, or nav in Martian Mono.",
+      "Don't put two display-scale headings on the same screen.",
+      "Don't set uppercase at normal width, or condense body prose.",
+      "Don't use a solid red destructive fill; destructive is alert text on an alert tint.",
+      "Don't loop, snap, or restart the pass swing - it is a damped settle that happens once."
+    ]
+  }
+}

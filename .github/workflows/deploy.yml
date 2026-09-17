@@ -1,0 +1,120 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Short-lived credentials from GitHub's OIDC provider. No AWS keys are stored in this repository.
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: ${{ vars.AWS_REGION }}
+
+jobs:
+  frontend:
+    name: Site to S3 and CloudFront
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+        working-directory: web
+      - name: Build the site
+        run: npm run build
+        working-directory: web
+        env:
+          VITE_CHAIN: sepolia
+          VITE_APP_NAME: Loyl
+          VITE_BADGE_ADDRESS: ${{ vars.BADGE_ADDRESS }}
+          VITE_BADGE_START_BLOCK: ${{ vars.BADGE_START_BLOCK }}
+          VITE_SEPOLIA_RPC_URL: ${{ secrets.SEPOLIA_RPC_URL }}
+          VITE_WALLETCONNECT_PROJECT_ID: ${{ secrets.WALLETCONNECT_PROJECT_ID }}
+          VITE_API_URL: /api
+
+      - uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Hashed assets are immutable and cached hard; index.html must never be cached.
+      - name: Upload hashed assets
+        run: |
+          aws s3 sync web/dist s3://${{ vars.SITE_BUCKET }} \
+            --delete --exclude index.html \
+            --cache-control "public,max-age=31536000,immutable"
+      - name: Upload index.html
+        run: |
+          aws s3 cp web/dist/index.html s3://${{ vars.SITE_BUCKET }}/index.html \
+            --cache-control "no-cache,must-revalidate"
+      - name: Invalidate the CDN
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ vars.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/index.html" "/"
+
+  indexer:
+    name: Indexer to EC2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: aws-actions/configure-aws-credentials@v5
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      - uses: aws-actions/amazon-ecr-login@v2
+        id: ecr
+
+      - name: Build and push the image
+        run: |
+          IMAGE=${{ steps.ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
+          docker build -t "$IMAGE" -t "${IMAGE%:*}:latest" indexer
+          docker push "$IMAGE"
+          docker push "${IMAGE%:*}:latest"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+
+      # Deploys through Systems Manager, so port 22 stays closed on the instance.
+      - name: Roll out on the instance
+        run: |
+          COMMAND_ID=$(aws ssm send-command \
+            --instance-ids ${{ vars.EC2_INSTANCE_ID }} \
+            --document-name AWS-RunShellScript \
+            --comment "Deploy ${{ github.sha }}" \
+            --parameters commands="[
+              \"set -euo pipefail\",
+              \"aws ecr get-login-password --region ${{ env.AWS_REGION }} | docker login --username AWS --password-stdin ${{ steps.ecr.outputs.registry }}\",
+              \"cd /opt/loyl\",
+              \"export INDEXER_IMAGE=${{ env.IMAGE }} AWS_REGION=${{ env.AWS_REGION }}\",
+              \"docker compose pull indexer\",
+              \"docker compose up -d --force-recreate indexer nginx\",
+              \"docker image prune -f\"
+            ]" \
+            --query Command.CommandId --output text)
+          echo "SSM command $COMMAND_ID"
+          aws ssm wait command-executed --command-id "$COMMAND_ID" --instance-id ${{ vars.EC2_INSTANCE_ID }} || true
+          aws ssm get-command-invocation --command-id "$COMMAND_ID" --instance-id ${{ vars.EC2_INSTANCE_ID }} \
+            --query '{Status:Status,Output:StandardOutputContent,Error:StandardErrorContent}' --output json
+          STATUS=$(aws ssm get-command-invocation --command-id "$COMMAND_ID" \
+            --instance-id ${{ vars.EC2_INSTANCE_ID }} --query Status --output text)
+          test "$STATUS" = "Success"
+
+      - name: Check the API answers
+        run: |
+          for attempt in $(seq 1 10); do
+            if curl -fsS "https://${{ vars.SITE_DOMAIN }}/api/health" | tee /dev/stderr | grep -q '"ok":true'; then
+              exit 0
+            fi
+            sleep 6
+          done
+          echo "The indexer did not report healthy through CloudFront."
+          exit 1
