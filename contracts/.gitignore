@@ -1,0 +1,8 @@
+out/
+cache/
+node_modules/
+previews/
+
+# Local chain artifacts; Sepolia broadcasts and deployments are kept as a public record
+broadcast/*/31337/
+deployments/31337.json

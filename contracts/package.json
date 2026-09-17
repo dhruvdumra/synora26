@@ -1,0 +1,16 @@
+{
+  "name": "@ncrypt/contracts",
+  "private": true,
+  "description": "Soulbound dynamic NFT badge with fully on-chain metadata",
+  "scripts": {
+    "build": "forge build --sizes",
+    "test": "forge test -vv",
+    "gas": "forge test --gas-report",
+    "snapshot": "forge snapshot",
+    "fmt": "forge fmt"
+  },
+  "devDependencies": {
+    "@openzeppelin/contracts": "5.6.1",
+    "forge-std": "github:foundry-rs/forge-std#v1.16.2"
+  }
+}
