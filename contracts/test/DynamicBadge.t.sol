@@ -28,7 +28,7 @@ contract DynamicBadgeTest is Test {
         (alice, aliceKey) = makeAddrAndKey("alice");
         (bob, bobKey) = makeAddrAndKey("bob");
 
-        badge = new DynamicBadge("NCrypt Pass", "NCPASS", admin);
+        badge = new DynamicBadge("Loyl", "LOYL", admin);
 
         vm.startPrank(admin);
         badge.grantRole(badge.STAFF_ROLE(), staff);

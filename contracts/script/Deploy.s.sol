@@ -10,8 +10,8 @@ import {DynamicBadge} from "../src/DynamicBadge.sol";
 ///      Sepolia: forge script script/Deploy.s.sol --rpc-url sepolia --account ncrypt-admin --broadcast --verify
 contract Deploy is Script {
     function run() external returns (DynamicBadge badge) {
-        string memory name = vm.envOr("BADGE_NAME", string("NCrypt Pass"));
-        string memory symbol = vm.envOr("BADGE_SYMBOL", string("NCPASS"));
+        string memory name = vm.envOr("BADGE_NAME", string("Loyl"));
+        string memory symbol = vm.envOr("BADGE_SYMBOL", string("LOYL"));
         uint256 startBlock = block.number;
 
         vm.startBroadcast();

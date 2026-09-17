@@ -3,7 +3,7 @@ import { foundry, sepolia } from 'viem/chains'
 
 const env = import.meta.env
 
-export const APP_NAME: string = env.VITE_APP_NAME || 'NCrypt Pass'
+export const APP_NAME: string = env.VITE_APP_NAME || 'Loyl'
 export const TEAM_NAME = 'NCrypt'
 export const EVENT_NAME = 'Synora26'
 
