@@ -13,13 +13,13 @@ function StatusIcon({ status }: { status: ActionRecord['status'] }) {
 export function ActivityLog({ records }: { records: ActionRecord[] }) {
   return (
     <section aria-labelledby="log-heading" className="flex flex-col gap-4">
-      <h2 id="log-heading" className="font-medium">
+      <h2 id="log-heading" className="font-display text-3xl uppercase">
         This session's transactions
       </h2>
       {records.length === 0 ? (
         <p className="text-sm text-muted-foreground">Transactions you send will appear here with their block and gas used.</p>
       ) : (
-        <ol className="flex flex-col divide-y rounded-xl border bg-card">
+        <ol className="flex flex-col divide-y divide-foreground/10 rounded-xl bg-card ring-1 ring-foreground/10">
           {records.map((record) => {
             const link = record.hash ? explorerLink.tx(record.hash) : undefined
             return (

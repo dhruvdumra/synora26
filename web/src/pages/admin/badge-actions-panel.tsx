@@ -43,7 +43,7 @@ export function BadgeActionsPanel({ onRecord }: { onRecord: (record: ActionRecor
     if (!isAddress(address)) return
     const receipt = await send('mintTo', [address], {
       pending: `Minting for ${shortAddress(address)}`,
-      success: `Minted a badge for ${shortAddress(address)}`,
+      success: `Minted a pass for ${shortAddress(address)}`,
       onRecord,
     })
     if (receipt) setMintAddress('')
@@ -53,7 +53,7 @@ export function BadgeActionsPanel({ onRecord }: { onRecord: (record: ActionRecor
     <div className="flex flex-col gap-8">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <Label htmlFor="action-token">Badge number</Label>
+          <Label htmlFor="action-token">Pass number</Label>
           <Input
             id="action-token"
             inputMode="numeric"
@@ -110,10 +110,10 @@ export function BadgeActionsPanel({ onRecord }: { onRecord: (record: ActionRecor
           />
           <Button type="submit" variant="outline" disabled={!isAddress(mintAddress.trim()) || busy !== null}>
             <SealCheckIcon weight="bold" data-icon="inline-start" />
-            Mint for attendee
+            Mint pass for attendee
           </Button>
         </div>
-        <p className="text-xs text-muted-foreground">For attendees without gas. Staff pay the fee, the badge goes to their wallet.</p>
+        <p className="text-xs text-muted-foreground">For attendees without gas. Staff pay the fee and the pass goes to their wallet.</p>
       </form>
     </div>
   )

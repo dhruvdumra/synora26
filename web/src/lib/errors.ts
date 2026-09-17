@@ -6,24 +6,24 @@ import {
 } from 'viem'
 
 const CONTRACT_ERRORS: Record<string, string> = {
-  AlreadyHasBadge: 'This wallet already has a badge.',
-  NoBadge: 'Mint a badge with this wallet first.',
-  AlreadyCheckedIn: 'That badge is already checked in to this session.',
+  AlreadyHasBadge: 'This wallet already holds a pass.',
+  NoBadge: 'Mint a pass with this wallet first.',
+  AlreadyCheckedIn: 'That pass is already checked in to this session.',
   SessionNotActive: 'This session is closed. Reopen it to check people in.',
   UnknownSession: 'That session does not exist.',
   InvalidSessionName: 'Session names need between 1 and 64 characters.',
-  InvalidBatchSize: 'A batch can hold between 1 and 200 badge IDs.',
+  InvalidBatchSize: 'A batch can hold between 1 and 200 pass numbers.',
   InvalidPoints: 'Points must be between 1 and 10.',
   SignatureExpired: 'This connect code has expired. Ask for a fresh one.',
   DeadlineTooFar: 'This connect code is not valid.',
-  InvalidSignature: 'This connect code was not signed by the badge holder.',
-  CannotConnectToSelf: 'You cannot connect with your own badge.',
+  InvalidSignature: 'This connect code was not signed by the pass holder.',
+  CannotConnectToSelf: 'You cannot connect with your own pass.',
   AlreadyConnected: 'You are already connected with this attendee.',
-  NotCheckedInYet: 'Both badges need at least one session check-in before connecting.',
-  Soulbound: 'Badges stay with the wallet that earned them and cannot be transferred.',
-  EnforcedPause: 'The organizers have paused the badge contract.',
+  NotCheckedInYet: 'Both passes need at least one session check-in before connecting.',
+  Soulbound: 'Passes stay with the wallet that earned them and cannot be transferred.',
+  EnforcedPause: 'The organizers have paused the pass contract.',
   AccessControlUnauthorizedAccount: 'This wallet does not have permission for that action.',
-  ERC721NonexistentToken: 'No badge exists with that ID.',
+  ERC721NonexistentToken: 'No pass exists with that number.',
 }
 
 /** Turns wallet, RPC and contract errors into one plain sentence for the UI. */

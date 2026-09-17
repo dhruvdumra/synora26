@@ -24,8 +24,8 @@ export function AdminPage() {
   if (!isConnected) {
     return (
       <Page>
-        <StatePanel icon={<WalletIcon weight="bold" />} title="Staff console" action={<WalletButton size="lg" />}>
-          Connect a staff wallet to run check-ins.
+        <StatePanel icon={<WalletIcon weight="bold" />} title="Door console" action={<WalletButton size="lg" />}>
+          Connect a staff wallet to run sessions and check people in.
         </StatePanel>
       </Page>
     )
@@ -41,8 +41,8 @@ export function AdminPage() {
   if (!isStaff) {
     return (
       <Page>
-        <StatePanel icon={<LockIcon weight="bold" />} title="This wallet is not staff">
-          {shortAddress(address)} does not hold the staff role on the badge contract. An admin can grant it.
+        <StatePanel icon={<LockIcon weight="bold" />} title="Not a staff wallet">
+          {shortAddress(address)} does not hold the staff role on the pass contract. An admin can grant it.
         </StatePanel>
       </Page>
     )
@@ -71,11 +71,11 @@ function Console({ isAdmin, paused }: { isAdmin: boolean; paused: boolean }) {
   return (
     <Page>
       <PageHeader
-        title="Staff console"
+        title="Door console"
         description={
           paused
             ? 'The contract is paused. Minting, check-ins and connections are blocked until it is resumed.'
-            : 'Run sessions, check people in and record talks. Every action is an on-chain transaction.'
+            : 'Open sessions, scan passes and record talks. Every action is signed and lands on-chain.'
         }
         actions={
           isAdmin && (

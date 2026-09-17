@@ -36,7 +36,7 @@ export function SessionsPanel({ sessions, isLoading, selected, onSelect, onRecor
 
   return (
     <section aria-labelledby="sessions-heading" className="flex flex-col gap-5">
-      <h2 id="sessions-heading" className="font-medium">
+      <h2 id="sessions-heading" className="font-display text-3xl uppercase">
         Sessions
       </h2>
 
@@ -73,8 +73,8 @@ export function SessionsPanel({ sessions, isLoading, selected, onSelect, onRecor
               <li
                 key={session.id.toString()}
                 className={cn(
-                  'flex items-center gap-3 rounded-lg border bg-card p-3 transition-colors',
-                  isSelected && 'border-foreground/40',
+                  'flex items-center gap-3 rounded-md bg-card p-3.5 ring-1 ring-foreground/10 transition-shadow',
+                  isSelected && 'ring-2 ring-foreground',
                   !session.active && 'opacity-70',
                 )}
               >
@@ -85,8 +85,8 @@ export function SessionsPanel({ sessions, isLoading, selected, onSelect, onRecor
                   aria-pressed={isSelected}
                   className="flex min-w-0 flex-1 flex-col items-start text-left disabled:cursor-not-allowed"
                 >
-                  <span className="w-full truncate text-sm font-medium">{session.name}</span>
-                  <span className="text-xs text-muted-foreground tabular">
+                  <span className="w-full truncate font-semibold">{session.name}</span>
+                  <span className="font-mono text-xs text-muted-foreground tabular">
                     {session.attendance} checked in{session.active ? '' : ', closed'}
                   </span>
                 </button>

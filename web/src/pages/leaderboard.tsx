@@ -64,7 +64,7 @@ export function LeaderboardPage() {
     <Page>
       <PageHeader
         title="Leaderboard"
-        description={`${total} ${total === 1 ? 'badge' : 'badges'} minted. Rankings update as check-ins land.`}
+        description={`${total} ${total === 1 ? 'pass' : 'passes'} issued. Rankings move the moment a check-in lands.`}
       />
 
       {isLoading ? (
@@ -72,41 +72,41 @@ export function LeaderboardPage() {
           {Array.from({ length: 5 }, (_, index) => <Skeleton key={index} className="h-16" />)}
         </div>
       ) : rows.length === 0 ? (
-        <StatePanel icon={<TrophyIcon weight="bold" />} title="No badges yet">
-          The first badge minted takes the top spot.
+        <StatePanel icon={<TrophyIcon weight="bold" />} title="No passes yet">
+          The first pass issued takes the top spot.
         </StatePanel>
       ) : (
-        <div className="overflow-hidden rounded-xl border bg-card">
+        <div className="overflow-x-auto rounded-xl bg-card ring-1 ring-foreground/10">
           <table className="w-full text-sm">
-            <caption className="sr-only">Badges ranked by score</caption>
+            <caption className="sr-only">Passes ranked by score</caption>
             <thead>
-              <tr className="border-b text-left text-xs text-muted-foreground">
-                <th scope="col" className="w-14 py-3 pl-4 font-normal sm:pl-6">Rank</th>
-                <th scope="col" className="py-3 font-normal">Badge</th>
-                <th scope="col" className="hidden py-3 font-normal sm:table-cell">Tier</th>
-                <th scope="col" className="hidden py-3 text-right font-normal md:table-cell">Sessions</th>
-                <th scope="col" className="hidden py-3 text-right font-normal md:table-cell">Talks</th>
-                <th scope="col" className="hidden py-3 text-right font-normal md:table-cell">Network</th>
-                <th scope="col" className="py-3 pr-4 text-right font-normal sm:pr-6">Score</th>
+              <tr className="border-b border-foreground/15 text-left text-[13px] text-muted-foreground">
+                <th scope="col" className="w-14 py-3 pl-4 font-medium sm:pl-6">Rank</th>
+                <th scope="col" className="py-3 font-medium">Pass</th>
+                <th scope="col" className="hidden py-3 font-medium sm:table-cell">Tier</th>
+                <th scope="col" className="hidden py-3 text-right font-medium md:table-cell">Sessions</th>
+                <th scope="col" className="hidden py-3 text-right font-medium md:table-cell">Talks</th>
+                <th scope="col" className="hidden py-3 text-right font-medium md:table-cell">Network</th>
+                <th scope="col" className="py-3 pr-4 text-right font-medium sm:pr-6">Score</th>
               </tr>
             </thead>
             <tbody>
               {rows.map((row, index) => {
                 const isMine = mine !== undefined && row.tokenId === mine
                 return (
-                  <tr key={row.tokenId.toString()} className={cn('border-b last:border-0', isMine && 'bg-muted/60')}>
-                    <td className="py-3.5 pl-4 font-mono text-muted-foreground tabular sm:pl-6">{index + 1}</td>
-                    <td className="py-3.5">
-                      <Link to={`/badge/${row.tokenId}`} className="flex flex-col hover:underline hover:underline-offset-4">
+                  <tr key={row.tokenId.toString()} className={cn('border-b border-foreground/10 last:border-0', isMine && 'bg-signal/25')}>
+                    <td className="py-4 pl-4 font-display text-3xl tabular sm:pl-6">{String(index + 1).padStart(2, '0')}</td>
+                    <td className="py-4">
+                      <Link to={`/badge/${row.tokenId}`} className="flex flex-col hover:underline">
                         <span className="font-mono">{badgeNumber(row.tokenId)}{isMine ? ' (you)' : ''}</span>
                         <span className="font-mono text-xs text-muted-foreground">{shortAddress(row.holder)}</span>
                       </Link>
                     </td>
-                    <td className="hidden py-3.5 sm:table-cell"><TierTag tier={row.tier} /></td>
-                    <td className="hidden py-3.5 text-right font-mono tabular md:table-cell">{row.sessions}</td>
-                    <td className="hidden py-3.5 text-right font-mono tabular md:table-cell">{row.talks}</td>
-                    <td className="hidden py-3.5 text-right font-mono tabular md:table-cell">{row.networking}</td>
-                    <td className="py-3.5 pr-4 text-right font-display text-xl tabular sm:pr-6">{row.score}</td>
+                    <td className="hidden py-4 sm:table-cell"><TierTag tier={row.tier} /></td>
+                    <td className="hidden py-4 text-right font-mono tabular md:table-cell">{row.sessions}</td>
+                    <td className="hidden py-4 text-right font-mono tabular md:table-cell">{row.talks}</td>
+                    <td className="hidden py-4 text-right font-mono tabular md:table-cell">{row.networking}</td>
+                    <td className="py-4 pr-4 text-right font-display text-4xl tabular sm:pr-6">{String(row.score).padStart(2, '0')}</td>
                   </tr>
                 )
               })}

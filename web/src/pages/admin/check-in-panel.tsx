@@ -71,7 +71,7 @@ export function CheckInPanel({ session, onRecord }: CheckInPanelProps) {
   return (
     <div className="flex flex-col gap-8">
       <form onSubmit={submitSingle} className="flex flex-col gap-2">
-        <Label htmlFor="checkin-token">Badge number</Label>
+        <Label htmlFor="checkin-token">Pass number</Label>
         <div className="flex flex-wrap gap-2">
           <Input
             id="checkin-token"
@@ -82,12 +82,12 @@ export function CheckInPanel({ session, onRecord }: CheckInPanelProps) {
             onChange={(event) => setTokenInput(event.target.value)}
             className="w-32 font-mono"
           />
-          <Button type="submit" disabled={!parseTokenIdList(tokenInput).length || busy !== null}>
+          <Button type="submit" variant="signal" disabled={!parseTokenIdList(tokenInput).length || busy !== null}>
             Check in
           </Button>
           <Button type="button" variant="outline" onClick={() => setScanning(true)}>
             <ScanIcon weight="bold" data-icon="inline-start" />
-            Scan badge
+            Scan pass
           </Button>
         </div>
         <p className="text-xs text-muted-foreground">Checking in to {session.name}.</p>
@@ -110,11 +110,11 @@ export function CheckInPanel({ session, onRecord }: CheckInPanelProps) {
           <p className="text-xs text-muted-foreground">
             One transaction for the whole room. Already checked-in or unknown numbers are skipped, not failed.
           </p>
-          <Button type="submit" variant="outline" disabled={batchIds.length === 0 || batchIds.length > MAX_BATCH || busy !== null}>
+          <Button type="submit" disabled={batchIds.length === 0 || batchIds.length > MAX_BATCH || busy !== null}>
             {batchIds.length > MAX_BATCH
               ? `Max ${MAX_BATCH} per batch`
               : batchIds.length > 0
-                ? `Check in ${batchIds.length} ${batchIds.length === 1 ? 'badge' : 'badges'}`
+                ? `Check in ${batchIds.length} ${batchIds.length === 1 ? 'pass' : 'passes'}`
                 : 'Check in batch'}
           </Button>
         </div>
@@ -124,10 +124,10 @@ export function CheckInPanel({ session, onRecord }: CheckInPanelProps) {
         open={scanning}
         onOpenChange={setScanning}
         title={`Scan into ${session.name}`}
-        description="Scan the check-in code on the attendee's badge page. Keep the camera open for the next person."
+        description="Scan the door code on the attendee's pass page. The camera stays open for the next person."
         onCode={(code) => {
           if (code.kind !== 'badge') {
-            toast.error('That is not a badge check-in code.')
+            toast.error('That is not a door code.')
             return false
           }
           void checkInOne(code.tokenId)
