@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+@import "@fontsource-variable/newsreader/opsz.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+  Design system: warm monochrome, one hairline border weight, color reserved for tier meaning.
+  Shape rule: cards 12px, controls 6px, tier tags pill.
+*/
+@theme inline {
+  --font-sans: "Geist Variable", "Helvetica Neue", sans-serif;
+  --font-mono: "Geist Mono Variable", "SF Mono", ui-monospace, monospace;
+  --font-display: "Newsreader Variable", Georgia, serif;
+  --font-heading: var(--font-sans);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+
+  --color-bronze: var(--tier-bronze);
+  --color-bronze-soft: var(--tier-bronze-soft);
+  --color-bronze-ink: var(--tier-bronze-ink);
+  --color-silver: var(--tier-silver);
+  --color-silver-soft: var(--tier-silver-soft);
+  --color-silver-ink: var(--tier-silver-ink);
+  --color-gold: var(--tier-gold);
+  --color-gold-soft: var(--tier-gold-soft);
+  --color-gold-ink: var(--tier-gold-ink);
+  --color-speaker: var(--tier-speaker);
+  --color-speaker-soft: var(--tier-speaker-soft);
+  --color-speaker-ink: var(--tier-speaker-ink);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 12px;
+
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  --background: #fbfbfa;
+  --foreground: #1c1c1a;
+  --card: #ffffff;
+  --card-foreground: #1c1c1a;
+  --popover: #ffffff;
+  --popover-foreground: #1c1c1a;
+  --primary: #151514;
+  --primary-foreground: #fbfbfa;
+  --secondary: #f3f2ef;
+  --secondary-foreground: #1c1c1a;
+  --muted: #f3f2ef;
+  --muted-foreground: #6b6a66;
+  --accent: #f3f2ef;
+  --accent-foreground: #1c1c1a;
+  --destructive: #9f2f2d;
+  --border: #eaeae8;
+  --input: #e2e1de;
+  --ring: #a8a6a1;
+  --success: #346538;
+  --success-soft: #edf3ec;
+
+  --tier-bronze: #b87333;
+  --tier-bronze-soft: #f7ede3;
+  --tier-bronze-ink: #83491a;
+  --tier-silver: #8e9aa6;
+  --tier-silver-soft: #eef1f4;
+  --tier-silver-ink: #4d5864;
+  --tier-gold: #c9a227;
+  --tier-gold-soft: #fbf3db;
+  --tier-gold-ink: #7f5b00;
+  --tier-speaker: #7c5cbf;
+  --tier-speaker-soft: #f0ebf9;
+  --tier-speaker-ink: #573c93;
+}
+
+.dark {
+  --background: #121211;
+  --foreground: #ecebe8;
+  --card: #181817;
+  --card-foreground: #ecebe8;
+  --popover: #1c1c1a;
+  --popover-foreground: #ecebe8;
+  --primary: #ecebe8;
+  --primary-foreground: #121211;
+  --secondary: #222220;
+  --secondary-foreground: #ecebe8;
+  --muted: #1f1f1d;
+  --muted-foreground: #9d9b96;
+  --accent: #232321;
+  --accent-foreground: #ecebe8;
+  --destructive: #e0706d;
+  --border: rgb(255 255 255 / 0.08);
+  --input: rgb(255 255 255 / 0.12);
+  --ring: #6b6a66;
+  --success: #8cc792;
+  --success-soft: rgb(140 199 146 / 0.1);
+
+  --tier-bronze-soft: rgb(184 115 51 / 0.14);
+  --tier-bronze-ink: #e3a46b;
+  --tier-silver-soft: rgb(142 154 166 / 0.16);
+  --tier-silver-ink: #c3ccd5;
+  --tier-gold-soft: rgb(201 162 39 / 0.14);
+  --tier-gold-ink: #e6c55e;
+  --tier-speaker-soft: rgb(124 92 191 / 0.18);
+  --tier-speaker-ink: #b9a2ec;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans antialiased;
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--foreground) 14%, transparent);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  /* Warm radial light behind hero areas; fixed so it never repaints on scroll. */
+  .ambient {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(40rem 28rem at 78% -6%, color-mix(in oklab, var(--tier-gold) 7%, transparent), transparent 70%),
+      radial-gradient(34rem 24rem at 8% 18%, color-mix(in oklab, var(--tier-bronze) 5%, transparent), transparent 70%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
