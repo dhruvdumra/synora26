@@ -1,4 +1,4 @@
-import { HandshakeIcon, QrCodeIcon, ScanIcon, WalletIcon } from '@phosphor-icons/react'
+import { QrCodeIcon, ScanIcon, WalletIcon } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
@@ -18,18 +18,16 @@ import { tierInfo } from '@/lib/tiers'
 import { ConnectCodeDialog } from './connect-code-dialog'
 import { MintPanel } from './mint-panel'
 
+const layout = 'grid gap-12 md:grid-cols-[minmax(0,360px)_1fr] md:gap-16 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-24'
+
 export function MyBadgePage() {
   const { address, isConnected, tokenId, isLoading } = useMyBadgeId()
 
   if (!isConnected || !address) {
     return (
       <Page>
-        <StatePanel
-          icon={<WalletIcon weight="bold" />}
-          title="Connect to see your badge"
-          action={<WalletButton size="lg" />}
-        >
-          Your badge lives in your wallet. Connect it to mint a badge or check your progress.
+        <StatePanel icon={<WalletIcon weight="bold" />} title="Your pass lives in your wallet" action={<WalletButton size="lg" />}>
+          Connect a wallet to mint your pass or see where it stands.
         </StatePanel>
       </Page>
     )
@@ -38,22 +36,22 @@ export function MyBadgePage() {
   if (isLoading) {
     return (
       <Page>
-        <div className="grid gap-10 md:grid-cols-[minmax(0,440px)_1fr]">
-          <Skeleton className="aspect-square w-full rounded-[28px]" />
+        <div className={layout}>
+          <Skeleton className="aspect-[540/860] w-full rounded-[22px]" />
           <div className="flex flex-col gap-4">
             <Skeleton className="h-6 w-32" />
-            <Skeleton className="h-14 w-48" />
-            <Skeleton className="h-24 w-full" />
+            <Skeleton className="h-24 w-64" />
+            <Skeleton className="h-28 w-full" />
           </div>
         </div>
       </Page>
     )
   }
 
-  return <Page>{tokenId ? <OwnedBadge tokenId={tokenId} /> : <MintPanel address={address} />}</Page>
+  return <Page>{tokenId ? <OwnedPass tokenId={tokenId} /> : <MintPanel address={address} />}</Page>
 }
 
-function OwnedBadge({ tokenId }: { tokenId: bigint }) {
+function OwnedPass({ tokenId }: { tokenId: bigint }) {
   const navigate = useNavigate()
   const { badge } = useBadge(tokenId)
   const { pulse, lastChange } = useTierChange(tokenId, badge?.tier)
@@ -63,57 +61,56 @@ function OwnedBadge({ tokenId }: { tokenId: bigint }) {
   useEffect(() => {
     if (!lastChange) return
     const reached = tierInfo(lastChange.to)
-    toast.success(`${reached.name} reached`, {
+    toast.success(`Pass re-issued at ${reached.name}`, {
       description: reached.summary,
-      action: { label: 'View perks', onClick: () => navigate('/perks') },
+      action: { label: 'Perks', onClick: () => navigate('/perks') },
     })
   }, [lastChange, navigate])
 
-  if (!badge) {
-    return <Skeleton className="aspect-square w-full max-w-[440px] rounded-[28px]" />
-  }
-
   return (
-    <div className="grid gap-10 md:grid-cols-[minmax(0,440px)_1fr] md:gap-14 lg:gap-20">
-      <div className="flex flex-col gap-4">
-        <BadgeArt image={badge.image} tier={badge.tier} pulse={pulse} alt={`Badge ${badgeNumber(tokenId)}, ${tierInfo(badge.tier).name} tier`} />
-        <p className="text-center text-xs text-muted-foreground">
-          Rendered by the contract. Updates as soon as a check-in lands on-chain.
-        </p>
+    <div className={layout}>
+      <div className="flex flex-col gap-5 pt-16 md:sticky md:top-24 md:self-start">
+        <BadgeArt
+          image={badge?.image ?? null}
+          pulse={pulse}
+          strap="header"
+          swing
+          alt={badge ? `Pass ${badgeNumber(tokenId)}, ${tierInfo(badge.tier).name} access` : 'Loading pass'}
+          className="max-w-[320px] md:max-w-none"
+        />
+        <p className="text-center text-sm text-muted-foreground">Drawn by the contract. Re-issues the moment your tier changes.</p>
       </div>
 
-      <div className="flex flex-col gap-10">
-        <BadgeDetails badge={badge} />
+      <div className="flex flex-col gap-12">
+        {badge ? <BadgeDetails badge={badge} /> : <Skeleton className="h-80 w-full" />}
 
-        <section aria-labelledby="checkin-heading" className="flex flex-col gap-5 rounded-xl border bg-card p-5 sm:flex-row sm:items-center sm:p-6">
-          <QrCode value={badgeUrl(tokenId)} label={`Badge ${badgeNumber(tokenId)} check-in code`} className="self-center" />
+        <section aria-labelledby="door-code" className="grid gap-6 rounded-xl bg-card p-6 ring-1 ring-foreground/10 sm:grid-cols-[auto_1fr] sm:items-center sm:p-8">
+          <QrCode value={badgeUrl(tokenId)} label={`Pass ${badgeNumber(tokenId)} door code`} className="justify-self-start" />
           <div className="flex flex-col gap-2">
-            <h2 id="checkin-heading" className="flex items-center gap-2 font-medium">
-              <QrCodeIcon weight="bold" className="size-4" />
-              Check-in code
+            <h2 id="door-code" className="font-display text-4xl uppercase">
+              Door code
             </h2>
-            <p className="text-sm text-muted-foreground">
-              Show this at the session door. Staff scan it and your badge updates within a block.
+            <p className="max-w-[40ch] text-muted-foreground">
+              Hold this up at the session door. Staff scan it and your pass updates within a block.
             </p>
           </div>
         </section>
 
-        <section aria-labelledby="network-heading" className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <h2 id="network-heading" className="flex items-center gap-2 font-medium">
-              <HandshakeIcon weight="bold" className="size-4" />
+        <section aria-labelledby="meet" className="flex flex-col gap-5 border-t border-foreground/15 pt-8">
+          <div className="flex flex-col gap-2">
+            <h2 id="meet" className="font-display text-4xl uppercase">
               Meet someone
             </h2>
-            <p className="text-sm text-muted-foreground">
-              Swap codes with another checked-in attendee. Each new connection adds a point to both badges.
+            <p className="max-w-[48ch] text-muted-foreground">
+              Swap codes with another checked-in attendee. Each new connection adds a point to both passes.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Button variant="outline" onClick={() => setShowConnectCode(true)}>
+            <Button size="lg" variant="outline" onClick={() => setShowConnectCode(true)}>
               <QrCodeIcon weight="bold" data-icon="inline-start" />
               Show my code
             </Button>
-            <Button variant="outline" onClick={() => setScanning(true)}>
+            <Button size="lg" variant="outline" onClick={() => setScanning(true)}>
               <ScanIcon weight="bold" data-icon="inline-start" />
               Scan their code
             </Button>

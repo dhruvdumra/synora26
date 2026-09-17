@@ -26,8 +26,8 @@ export function PublicBadgePage() {
   if (tokenId === undefined || notFound) {
     return (
       <Page>
-        <StatePanel icon={<MagnifyingGlassIcon weight="bold" />} title="Badge not found">
-          No badge has been minted with that number yet.
+        <StatePanel icon={<MagnifyingGlassIcon weight="bold" />} title="No such pass">
+          No pass has been issued with that number yet.
         </StatePanel>
       </Page>
     )
@@ -35,22 +35,22 @@ export function PublicBadgePage() {
 
   return (
     <Page>
-      <div className="grid gap-10 md:grid-cols-[minmax(0,440px)_1fr] md:gap-14 lg:gap-20">
-        {badge ? (
+      <div className="grid gap-12 md:grid-cols-[minmax(0,360px)_1fr] md:gap-16 lg:grid-cols-[minmax(0,400px)_1fr] lg:gap-24">
+        <div className="pt-16 md:sticky md:top-24 md:self-start">
           <BadgeArt
-            image={badge.image}
-            tier={badge.tier}
+            image={badge?.image ?? null}
             pulse={pulse}
-            alt={`Badge ${badgeNumber(tokenId)}, ${tierInfo(badge.tier).name} tier`}
+            strap="header"
+            swing
+            alt={badge ? `Pass ${badgeNumber(tokenId)}, ${tierInfo(badge.tier).name} access` : 'Loading pass'}
+            className="max-w-[320px] md:max-w-none"
           />
-        ) : (
-          <Skeleton className="aspect-square w-full rounded-[28px]" />
-        )}
+        </div>
         <div className="flex flex-col gap-10">
-          {badge && <BadgeDetails badge={badge} />}
+          {badge ? <BadgeDetails badge={badge} /> : <Skeleton className="h-80 w-full" />}
           {badge && (
-            <p className="text-sm text-muted-foreground">
-              Held by <span className="font-mono text-foreground">{shortAddress(badge.holder)}</span>
+            <p className="text-muted-foreground">
+              Held by <span className="font-mono text-sm text-foreground">{shortAddress(badge.holder)}</span>
             </p>
           )}
           {isStaff && badge && <QuickCheckIn tokenId={tokenId} />}
@@ -68,9 +68,9 @@ function QuickCheckIn({ tokenId }: { tokenId: bigint }) {
   const selected = sessions.find((session) => session.id === (sessionId ?? sessions.find((s) => s.active)?.id))
 
   return (
-    <section aria-labelledby="quick-checkin" className="flex flex-col gap-3 rounded-xl border bg-card p-5">
-      <h2 id="quick-checkin" className="font-medium">
-        Staff check-in
+    <section aria-labelledby="quick-checkin" className="flex flex-col gap-4 rounded-xl bg-card p-6 ring-1 ring-foreground/10">
+      <h2 id="quick-checkin" className="font-display text-3xl uppercase">
+        Check in at the door
       </h2>
       <Label htmlFor="quick-session" className="sr-only">
         Session
@@ -78,6 +78,7 @@ function QuickCheckIn({ tokenId }: { tokenId: bigint }) {
       <div className="flex flex-col gap-2 sm:flex-row">
         <SessionSelect id="quick-session" sessions={sessions} value={selected?.id} onChange={setSessionId} className="flex-1" />
         <Button
+          variant="signal"
           disabled={!selected || busy !== null}
           onClick={() =>
             selected &&

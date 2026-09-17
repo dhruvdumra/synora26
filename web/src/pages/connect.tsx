@@ -41,7 +41,7 @@ export function ConnectPage() {
     return (
       <Page>
         <StatePanel icon={<LinkBreakIcon weight="bold" />} title="This connect code is not valid">
-          Ask the other attendee to open their badge and show a fresh code.
+          Ask the other attendee to open their pass and show a fresh code.
         </StatePanel>
       </Page>
     )
@@ -57,18 +57,26 @@ export function ConnectPage() {
   else if (alreadyConnected.data) blocker = 'You are already connected with this attendee.'
 
   return (
-    <Page className="max-w-3xl">
-      <div className="grid items-center gap-10 sm:grid-cols-[220px_1fr]">
-        <BadgeArt image={peer?.image ?? null} tier={peer?.tier ?? 0} alt={`Badge ${badgeNumber(code.peerTokenId)}`} />
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col gap-2">
+    <Page className="max-w-5xl">
+      <div className="grid items-center gap-12 sm:grid-cols-[240px_1fr] sm:gap-16">
+        <div className="pt-14">
+          <BadgeArt
+            image={peer?.image ?? null}
+            strap="header"
+            swing
+            alt={`Pass ${badgeNumber(code.peerTokenId)}`}
+            className="max-w-[220px] sm:max-w-none"
+          />
+        </div>
+        <div className="flex flex-col gap-7">
+          <div className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
               {peer && <TierTag tier={peer.tier} />}
-              <span className="font-mono text-[13px] text-muted-foreground">Badge {badgeNumber(code.peerTokenId)}</span>
+              <span className="font-mono text-xs text-muted-foreground">Pass {badgeNumber(code.peerTokenId)}</span>
             </div>
-            <h1 className="font-display text-4xl leading-[1.1]">Connect with this attendee</h1>
-            <p className="text-muted-foreground">
-              Their wallet signed this code. Confirming adds a networking point to both badges.
+            <h1 className="font-display text-[clamp(3rem,8vw,5rem)] uppercase">Meet this attendee</h1>
+            <p className="max-w-[44ch] text-lg text-muted-foreground">
+              Their wallet signed this code. Confirm, and both passes gain a networking point.
             </p>
           </div>
 
@@ -76,12 +84,13 @@ export function ConnectPage() {
             <StatePanel icon={<WalletIcon weight="bold" />} title="Connect your wallet first" className="mx-0 items-start py-6 text-left" action={<WalletButton />} />
           ) : isLoading ? null : !myTokenId ? (
             <p className="text-sm text-muted-foreground">
-              You need a badge to connect. <Link to="/badge" className="text-foreground underline underline-offset-4">Mint yours first.</Link>
+              You need a pass to connect. <Link to="/badge" className="text-foreground underline">Mint yours first.</Link>
             </p>
           ) : (
             <div className="flex flex-col gap-3">
               <Button
                 size="lg"
+                variant="signal"
                 className="self-start"
                 disabled={blocker !== null || busy !== null}
                 onClick={async () => {

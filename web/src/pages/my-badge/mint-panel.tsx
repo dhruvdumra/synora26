@@ -1,10 +1,25 @@
-import { CopyIcon, SealCheckIcon } from '@phosphor-icons/react'
+import { CopyIcon } from '@phosphor-icons/react'
 import { toast } from 'sonner'
 import { useBalance } from 'wagmi'
 import { QrCode } from '@/components/qr-code'
 import { Button } from '@/components/ui/button'
 import { useContractAction } from '@/hooks/use-contract-action'
 import { chain, isLocalChain } from '@/lib/config'
+import { shortAddress } from '@/lib/format'
+
+/** An unissued pass: the outline waiting for its band. */
+function BlankPass() {
+  return (
+    <div
+      aria-hidden="true"
+      className="relative aspect-[540/860] w-[220px] shrink-0 rounded-[20px] border-2 border-dashed border-foreground/25 sm:w-[280px]"
+    >
+      <span className="absolute top-[4%] left-1/2 h-[2%] w-[16%] -translate-x-1/2 rounded-full border-2 border-dashed border-foreground/25" />
+      <span className="absolute inset-x-0 top-[35%] h-[17%] bg-foreground/[0.06]" />
+      <span className="font-display absolute top-[39%] left-[9%] text-[clamp(2.5rem,4vw,3.5rem)] text-foreground/25 uppercase">Bronze</span>
+    </div>
+  )
+}
 
 export function MintPanel({ address }: { address: `0x${string}` }) {
   const { send, busy } = useContractAction()
@@ -12,48 +27,52 @@ export function MintPanel({ address }: { address: `0x${string}` }) {
   const hasGas = balance.data ? balance.data.value > 0n : true
 
   return (
-    <div className="grid gap-10 rounded-xl border bg-card p-6 sm:p-10 md:grid-cols-[1fr_auto] md:items-center">
-      <div className="flex max-w-lg flex-col gap-5">
-        <div className="flex size-11 items-center justify-center rounded-lg bg-bronze-soft text-bronze-ink">
-          <SealCheckIcon weight="bold" className="size-5" />
-        </div>
-        <div className="flex flex-col gap-2">
-          <h1 className="font-display text-4xl leading-[1.1]">Claim your badge</h1>
-          <p className="text-muted-foreground">
-            Your badge starts at Bronze. It cannot be transferred, so the progress you earn stays with this wallet.
+    <div className="grid gap-14 md:grid-cols-[280px_1fr] md:items-center md:gap-20">
+      <BlankPass />
+
+      <div className="flex flex-col gap-10">
+        <div className="flex flex-col gap-4">
+          <h1 className="font-display text-[clamp(3.5rem,9vw,6.5rem)] uppercase">Claim your pass</h1>
+          <p className="max-w-[46ch] text-xl leading-snug text-muted-foreground">
+            It starts at Bronze and is locked to this wallet, so everything you earn stays with you.
           </p>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
+
+        <div className="flex flex-wrap items-center gap-4">
           <Button
             size="lg"
+            variant="signal"
             disabled={busy !== null || !hasGas}
-            onClick={() => void send('mint', [], { pending: 'Minting your badge', success: 'Badge minted' })}
+            onClick={() => void send('mint', [], { pending: 'Issuing your pass', success: 'Pass issued' })}
           >
-            {busy === 'mint' ? 'Minting...' : 'Mint badge'}
+            {busy === 'mint' ? 'Issuing...' : 'Mint my pass'}
           </Button>
           {!hasGas && (
-            <p className="text-sm text-muted-foreground">
-              {isLocalChain ? 'This account has no ETH.' : 'No Sepolia ETH for gas. Ask staff to mint it for you.'}
+            <p className="text-muted-foreground">
+              {isLocalChain ? 'This account has no ETH.' : 'No Sepolia ETH for gas. Staff can mint it for you.'}
             </p>
           )}
         </div>
-      </div>
 
-      <div className="flex flex-col items-center gap-3 border-t pt-8 md:border-t-0 md:border-l md:pt-0 md:pl-10">
-        <QrCode value={address} label="Wallet address" />
-        <p className="max-w-[210px] text-center text-xs text-muted-foreground">
-          No gas? Staff can scan your address and mint the badge for you.
-        </p>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => {
-            void navigator.clipboard.writeText(address).then(() => toast.success('Address copied'))
-          }}
-        >
-          <CopyIcon weight="bold" data-icon="inline-start" />
-          Copy address
-        </Button>
+        <div className="flex flex-col gap-5 border-t border-foreground/15 pt-8 sm:flex-row sm:items-center">
+          <QrCode value={address} label="Wallet address" />
+          <div className="flex flex-col items-start gap-2">
+            <h2 className="font-display text-3xl uppercase">No gas?</h2>
+            <p className="max-w-[36ch] text-muted-foreground">
+              Show this to staff. They mint the pass straight to <span className="font-mono text-sm text-foreground">{shortAddress(address)}</span>.
+            </p>
+            <Button
+              variant="ghost"
+              className="-ml-3"
+              onClick={() => {
+                void navigator.clipboard.writeText(address).then(() => toast.success('Address copied'))
+              }}
+            >
+              <CopyIcon weight="bold" data-icon="inline-start" />
+              Copy address
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   )

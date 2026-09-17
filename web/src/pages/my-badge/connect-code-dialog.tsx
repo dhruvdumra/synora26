@@ -64,7 +64,7 @@ export function ConnectCodeDialog({ tokenId, open, onOpenChange }: ConnectCodeDi
         <DialogHeader>
           <DialogTitle>Your connect code</DialogTitle>
           <DialogDescription>
-            Let another attendee scan this. You both get a networking point once their transaction confirms.
+            Let another attendee scan this. You both gain a networking point once their transaction confirms.
           </DialogDescription>
         </DialogHeader>
 
