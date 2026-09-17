@@ -1,20 +1,19 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
-@import "@fontsource-variable/geist-mono";
-@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/archivo/standard.css";
+@import "@fontsource-variable/martian-mono/standard.css";
 
 @custom-variant dark (&:is(.dark *));
 
 /*
-  Design system: warm monochrome, one hairline border weight, color reserved for tier meaning.
-  Shape rule: cards 12px, controls 6px, tier tags pill.
+  Loyl: the event access pass.
+  Ground is venue daylight grey, ink is near-black, one access-lime signal marks granted and live states.
+  Tier color lives only on access bands and chips. Shape rule: panels 12px, controls 8px, access chips 4px.
 */
 @theme inline {
-  --font-sans: "Geist Variable", "Helvetica Neue", sans-serif;
-  --font-mono: "Geist Mono Variable", "SF Mono", ui-monospace, monospace;
-  --font-display: "Newsreader Variable", Georgia, serif;
+  --font-sans: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Martian Mono Variable", ui-monospace, "SF Mono", Menlo, monospace;
   --font-heading: var(--font-sans);
 
   --color-background: var(--background);
@@ -35,24 +34,21 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-success: var(--success);
-  --color-success-soft: var(--success-soft);
 
-  --color-bronze: var(--tier-bronze);
-  --color-bronze-soft: var(--tier-bronze-soft);
-  --color-bronze-ink: var(--tier-bronze-ink);
-  --color-silver: var(--tier-silver);
-  --color-silver-soft: var(--tier-silver-soft);
-  --color-silver-ink: var(--tier-silver-ink);
-  --color-gold: var(--tier-gold);
-  --color-gold-soft: var(--tier-gold-soft);
-  --color-gold-ink: var(--tier-gold-ink);
-  --color-speaker: var(--tier-speaker);
-  --color-speaker-soft: var(--tier-speaker-soft);
-  --color-speaker-ink: var(--tier-speaker-ink);
+  --color-signal: var(--signal);
+  --color-signal-ink: var(--signal-ink);
+  --color-granted: var(--granted);
+  --color-pass: var(--pass);
+  --color-pass-ink: var(--pass-ink);
+
+  --color-bronze: #e08a4b;
+  --color-silver: #c3cbd6;
+  --color-gold: #f2c94c;
+  --color-speaker: #a48bff;
+  --color-band-ink: #0e0f11;
 
   --radius-sm: 4px;
-  --radius-md: 6px;
+  --radius-md: 8px;
   --radius-lg: 8px;
   --radius-xl: 12px;
   --radius-2xl: 12px;
@@ -63,116 +59,111 @@
 :root {
   --radius: 0.5rem;
 
-  --background: #fbfbfa;
-  --foreground: #1c1c1a;
+  --background: #eef0f3;
+  --foreground: #0c0d0f;
   --card: #ffffff;
-  --card-foreground: #1c1c1a;
+  --card-foreground: #0c0d0f;
   --popover: #ffffff;
-  --popover-foreground: #1c1c1a;
-  --primary: #151514;
-  --primary-foreground: #fbfbfa;
-  --secondary: #f3f2ef;
-  --secondary-foreground: #1c1c1a;
-  --muted: #f3f2ef;
-  --muted-foreground: #6b6a66;
-  --accent: #f3f2ef;
-  --accent-foreground: #1c1c1a;
-  --destructive: #9f2f2d;
-  --border: #eaeae8;
-  --input: #e2e1de;
-  --ring: #a8a6a1;
-  --success: #346538;
-  --success-soft: #edf3ec;
+  --popover-foreground: #0c0d0f;
+  --primary: #0c0d0f;
+  --primary-foreground: #f4f5f7;
+  --secondary: #e3e6eb;
+  --secondary-foreground: #0c0d0f;
+  --muted: #e3e6eb;
+  --muted-foreground: #555a63;
+  --accent: #e3e6eb;
+  --accent-foreground: #0c0d0f;
+  --destructive: #b42318;
+  --border: #d9dde3;
+  --input: #cdd2da;
+  --ring: #0c0d0f;
 
-  --tier-bronze: #b87333;
-  --tier-bronze-soft: #f7ede3;
-  --tier-bronze-ink: #83491a;
-  --tier-silver: #8e9aa6;
-  --tier-silver-soft: #eef1f4;
-  --tier-silver-ink: #4d5864;
-  --tier-gold: #c9a227;
-  --tier-gold-soft: #fbf3db;
-  --tier-gold-ink: #7f5b00;
-  --tier-speaker: #7c5cbf;
-  --tier-speaker-soft: #f0ebf9;
-  --tier-speaker-ink: #573c93;
+  --signal: #c6f432;
+  --signal-ink: #0c0d0f;
+  --granted: #3b6e0c;
+  --pass: #0e0f11;
+  --pass-ink: #f2f3f5;
 }
 
 .dark {
-  --background: #121211;
-  --foreground: #ecebe8;
-  --card: #181817;
-  --card-foreground: #ecebe8;
-  --popover: #1c1c1a;
-  --popover-foreground: #ecebe8;
-  --primary: #ecebe8;
-  --primary-foreground: #121211;
-  --secondary: #222220;
-  --secondary-foreground: #ecebe8;
-  --muted: #1f1f1d;
-  --muted-foreground: #9d9b96;
-  --accent: #232321;
-  --accent-foreground: #ecebe8;
-  --destructive: #e0706d;
-  --border: rgb(255 255 255 / 0.08);
-  --input: rgb(255 255 255 / 0.12);
-  --ring: #6b6a66;
-  --success: #8cc792;
-  --success-soft: rgb(140 199 146 / 0.1);
+  --background: #17181d;
+  --foreground: #eef0f3;
+  --card: #1e1f25;
+  --card-foreground: #eef0f3;
+  --popover: #232429;
+  --popover-foreground: #eef0f3;
+  --primary: #eef0f3;
+  --primary-foreground: #17181d;
+  --secondary: #26272d;
+  --secondary-foreground: #eef0f3;
+  --muted: #232429;
+  --muted-foreground: #9da2ab;
+  --accent: #26272d;
+  --accent-foreground: #eef0f3;
+  --destructive: #f97066;
+  --border: rgb(255 255 255 / 0.11);
+  --input: rgb(255 255 255 / 0.14);
+  --ring: #c6f432;
 
-  --tier-bronze-soft: rgb(184 115 51 / 0.14);
-  --tier-bronze-ink: #e3a46b;
-  --tier-silver-soft: rgb(142 154 166 / 0.16);
-  --tier-silver-ink: #c3ccd5;
-  --tier-gold-soft: rgb(201 162 39 / 0.14);
-  --tier-gold-ink: #e6c55e;
-  --tier-speaker-soft: rgb(124 92 191 / 0.18);
-  --tier-speaker-ink: #b9a2ec;
+  --granted: #c6f432;
+  --pass: #0b0c0e;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/60;
   }
   html {
     @apply font-sans antialiased;
     color-scheme: light;
+    font-variation-settings: "wdth" 100;
+    scrollbar-color: color-mix(in oklab, var(--foreground) 28%, transparent) transparent;
+    scrollbar-width: thin;
   }
   html.dark {
     color-scheme: dark;
   }
   body {
     @apply bg-background text-foreground;
-    line-height: 1.6;
-    text-rendering: optimizeLegibility;
+    line-height: 1.55;
+    font-feature-settings: "tnum" 0;
+    caret-color: var(--foreground);
   }
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
   }
   ::selection {
-    background: color-mix(in oklab, var(--foreground) 14%, transparent);
+    background: var(--signal);
+    color: var(--signal-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
   }
 }
 
 @layer utilities {
+  /* Condensed credential lettering for headings and tier names. */
   .font-display {
-    font-family: var(--font-display);
-    font-optical-sizing: auto;
-    letter-spacing: -0.02em;
+    font-family: var(--font-sans);
+    font-stretch: 62%;
+    font-variation-settings: "wdth" 62;
+    font-weight: 800;
+    letter-spacing: -0.005em;
+    word-spacing: 0.12em;
+    line-height: 0.92;
+  }
+  .font-condensed {
+    font-stretch: 84%;
+    font-variation-settings: "wdth" 84;
   }
   .tabular {
     font-variant-numeric: tabular-nums;
-  }
-  /* Warm radial light behind hero areas; fixed so it never repaints on scroll. */
-  .ambient {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 0;
-    background:
-      radial-gradient(40rem 28rem at 78% -6%, color-mix(in oklab, var(--tier-gold) 7%, transparent), transparent 70%),
-      radial-gradient(34rem 24rem at 8% 18%, color-mix(in oklab, var(--tier-bronze) 5%, transparent), transparent 70%);
   }
 }
 
