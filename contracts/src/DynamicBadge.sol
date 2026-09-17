@@ -275,8 +275,18 @@ contract DynamicBadge is ERC721, AccessControl, Pausable, EIP712 {
     }
 
     function tokenURI(uint256 tokenId) public view override returns (string memory) {
-        _requireOwned(tokenId);
-        return BadgeRenderer.tokenURI(name(), tokenId, _badges[tokenId]);
+        address holder = _requireOwned(tokenId);
+        return BadgeRenderer.tokenURI(name(), tokenId, holder, _badges[tokenId]);
+    }
+
+    /// @notice Renders any trait combination with the live renderer, without minting anything.
+    /// @dev Lets the site demonstrate a pass levelling up using the same artwork holders get.
+    function previewURI(uint256 tokenId, address holder, Badge calldata badge)
+        external
+        view
+        returns (string memory)
+    {
+        return BadgeRenderer.tokenURI(name(), tokenId, holder, badge);
     }
 
     function supportsInterface(bytes4 interfaceId)
