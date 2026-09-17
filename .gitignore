@@ -25,3 +25,9 @@ npm-debug.log*
 Thumbs.db
 .idea/
 __pycache__/
+
+# Design tooling scratch output
+.impeccable/review/
+.impeccable/build/
+.impeccable/mocks/
+.impeccable/config.local.json
