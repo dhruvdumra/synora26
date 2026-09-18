@@ -7,7 +7,7 @@ Each attendee holds one soulbound NFT. Staff check people in at session doors, a
 and the pass re-issues itself at a higher tier as its traits change. The artwork and metadata are drawn by
 the smart contract from live on-chain state, so the credential can never drift from the truth.
 
-> This README is a working draft. Rewrite the prose in your own voice before judging.
+
 
 ## What it does
 
